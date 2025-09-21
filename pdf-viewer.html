@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate Viewer</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <style>
+    html, body { margin: 0; height: 100%; }
+    iframe { width: 100%; height: 100%; border: none; }
+    .message {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: sans-serif;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="pdfFrame"></iframe>
+  <div id="fallback" class="message" style="display: none;">
+    No PDF file specified.
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const file = urlParams.get("file");
+    const pdfFrame = document.getElementById("pdfFrame");
+    const fallback = document.getElementById("fallback");
+
+    if (file) {
+      pdfFrame.src = file;
+      pdfFrame.style.display = "block";
+      fallback.style.display = "none";
+    } else {
+      pdfFrame.style.display = "none";
+      fallback.style.display = "flex";
+    }
+  </script>
+</body>
+</html>
